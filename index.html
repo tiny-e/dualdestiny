@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Destiny Clock Thingy</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000; /* Black background */
+        }
+
+        .circle {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .diamond {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            background-color: #d3d3d3; /* Light gray color */
+            color: black; /* Text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: center;
+            transform: rotate(45deg);
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition for color change */
+        }
+
+        .diamond span {
+            transform: rotate(-45deg);
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background-color: #d3d3d3; /* Light gray color */
+            color: black; /* Text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1; /* Ensure it is above the diamonds */
+            cursor: pointer; /* Pointer cursor to indicate it's clickable */
+        }
+    </style>
+</head>
+<body>
+    <div class="circle">
+        <!-- Center circle with text -->
+        <div class="center-circle" id="reset">Reset</div>
+
+        <!-- Diamond elements -->
+        <div class="diamond" style="transform: rotate(-165deg) translateX(150px) rotate(-45deg);"><span>1</span></div>
+        <div class="diamond" style="transform: rotate(-195deg) translateX(150px) rotate(-45deg);"><span>2</span></div>
+        <div class="diamond" style="transform: rotate(-225deg) translateX(150px) rotate(-45deg);"><span>3</span></div>
+        <div class="diamond" style="transform: rotate(-255deg) translateX(150px) rotate(-45deg);"><span>4</span></div>
+        <div class="diamond" style="transform: rotate(-285deg) translateX(150px) rotate(-45deg);"><span>5</span></div>
+        <div class="diamond" style="transform: rotate(-315deg) translateX(150px) rotate(-45deg);"><span>6</span></div>
+        <div class="diamond" style="transform: rotate(-345deg) translateX(150px) rotate(-45deg);"><span>7</span></div>
+        <div class="diamond" style="transform: rotate(-375deg) translateX(150px) rotate(-45deg);"><span>8</span></div>
+        <div class="diamond" style="transform: rotate(-405deg) translateX(150px) rotate(-45deg);"><span>9</span></div>
+    </div>
+
+    <script>
+        // JavaScript to toggle the diamond colors
+        document.querySelectorAll('.diamond').forEach(diamond => {
+            diamond.addEventListener('click', () => {
+                // Check the computed style to handle any potential color format issues
+                const currentColor = window.getComputedStyle(diamond).backgroundColor;
+                if (currentColor === 'rgb(211, 211, 211)') {
+                    diamond.style.backgroundColor = '#e74c3c'; // Color when toggled
+                } else {
+                    diamond.style.backgroundColor = '#d3d3d3'; // Original color
+                }
+            });
+        });
+
+        // JavaScript to reset all diamonds to gray
+        document.getElementById('reset').addEventListener('click', () => {
+            document.querySelectorAll('.diamond').forEach(diamond => {
+                diamond.style.backgroundColor = '#d3d3d3'; // Reset to original color
+            });
+        });
+    </script>
+</body>
+</html>
